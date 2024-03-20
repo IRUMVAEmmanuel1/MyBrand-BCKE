@@ -8,10 +8,11 @@ export const isAdmin = async (req: any, res: Response, next: NextFunction) => {
         } else {
             return res.status(401).json({
                 status: 401,
-                message: "You are not authorized to perform this action"
+                message: "This Action is only performed by Admin"
             })
         }
     } catch (error:any) {
         return res.status(401).json({ error: error.message });
     }
+    
 };
