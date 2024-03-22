@@ -5,12 +5,54 @@ import blogsController from "../controller/blogs.controller";
 import uploadService from "../service/multer";
 import { isAdmin } from "../middleware/UserMiddleware";
 
-const blogsRoutes = express.Router();
-blogsRoutes.post("/blog", uploadService.single("image"), Jwt.tokenValidation, isAdmin, blogsController.create_blogs);
+const blogRoutes = express.Router();
+blogRoutes.post("/blog", uploadService.single("image"), Jwt.tokenValidation, isAdmin, blogsController.create_blogs);
 
-blogsRoutes.get("/blogs", blogsController.getAllBlogs);
-blogsRoutes.get("/blog/:id", blogsController.getSingleBlog);
-blogsRoutes.patch("/blog/:id", blogsController.updatedBlogs);
-blogsRoutes.delete("/blog/:id", blogsController.removeBlogs);
+blogRoutes.get("/blogs", blogsController.getAllBlogs);
+blogRoutes.get("/blog/:id", blogsController.getSingleBlog);
+blogRoutes.patch("/blog/:id", blogsController.updatedBlogs);
+blogRoutes.delete("/blog/:id", blogsController.removeBlogs);
 
-export default blogsRoutes;
+
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Blogs
+ *   description: API endpoints for managing blogs
+ */
+
+/**
+ * @swagger
+ * /api/blog:
+ *   post:
+ *     summary: Create a new blog post
+ *     tags: [Blogs]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: The title of the blog post
+ *               image:
+ *                 type: string
+ *                 description: URL of the image for the blog post
+ *               content:
+ *                 type: string
+ *                 description: The content of the blog post
+ *            
+ *     responses:
+ *       201:
+ *         description: Blog post created successfully
+ *       400:
+ *         description: Invalid request body
+ */
+
+export default blogRoutes;
+
+
