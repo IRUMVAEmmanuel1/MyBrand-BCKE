@@ -1,9 +1,10 @@
 {
-  "name": "mybrand",
+  "name": "y",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
+  "main": "",
+  "scripts": { 
+    "start": "nodemon src/index.ts",
     "test": "jest --coverage",
     "dev": "nodemon ./dist/index.ts"
   },
