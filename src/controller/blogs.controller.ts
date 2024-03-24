@@ -20,8 +20,8 @@ const create_blogs = async (req: any, res: Response) => {
 		});
 		const blogs = await blogsService.createBlogs( req, image.secure_url);
 		if (!blogs) {
-			res.status(400).json({
-				status: 400,
+			res.status(401).json({
+				status: 401,
 				message: valid.error?.message,
 			});
 		} else {

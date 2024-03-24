@@ -30,6 +30,7 @@ const users_register = async (req: Request) => {
 		throw new Error(err.message);
 	}
 };
+
 const userLogin = async (req: Request) => {
 	try {
 		const valid = joiValidation.validateUsersData(req.body);
@@ -44,15 +45,25 @@ const userLogin = async (req: Request) => {
 		throw new Error(err.message);
 	}
 };
-//Retriving all users in system
-const retrieve = async () => {
+
+// Retrieve user by ID
+const getUserById = async (userId: string) => {
 	try {
-			return await Users.find().select('-password');
+		const user = await Users.findById(userId);
+		return user;
 	} catch (error: any) {
-			throw new Error(error.message);
+		throw new Error(error.message);
 	}
 };
 
+// Retriving all users in the system
+const retrieve = async () => {
+	try {
+		return await Users.find().select('-password');
+	} catch (error: any) {
+		throw new Error(error.message);
+	}
+};
 
 const gettingLoggedInUser = async () => {
 	try {
@@ -62,9 +73,11 @@ const gettingLoggedInUser = async () => {
 		throw new Error(error.message);
 	}
 };
+
 export default {
 	users_register,
 	userLogin,
 	gettingLoggedInUser,
 	retrieve,
+	getUserById, 
 };

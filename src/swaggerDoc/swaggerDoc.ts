@@ -3,7 +3,7 @@ import Jwt from "../helper/jwt";
 import blogsController from "../controller/blogs.controller";
 import uploadService from "../service/multer";
 import { isAdmin } from "../middleware/UserMiddleware";
-
+import userC
 const router = express.Router();
 
 /**
@@ -133,7 +133,177 @@ const router = express.Router();
  *         content: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
  */
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: API endpoints for managing users
+ */
+
+/**
+ * @swagger
+ * /api/v1/users:
+ *   post:
+ *     summary: Register a new user
+ *     tags: 
+ *       - Users
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ *       400:
+ *         description: Bad request, invalid user data
+ */
+
+/**
+ * @swagger
+ * /api/v1/users:
+ *   post:
+ *     summary: Authenticate user
+ *     tags: 
+ *       - Users
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User retrived successfully
+ *       401:
+ *         description: Unauthorized, invalid credentials
+ */
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: API endpoints for managing users
+ */
+
+/**
+ * @swagger
+ * /api/v1/users:
+ *   get:
+ *     summary: Get all users
+ *     tags: 
+ *       - Users
+ *     responses:
+ *       200:
+ *         description: List of users retrieved successfully
+ *       404:
+ *         description: No users found
+ *   post:
+ *     summary: Register a new user
+ *     tags: 
+ *       - Users
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       201:
+ *         description: User created successfully
+ *       400:
+ *         description: Bad request, invalid user data
+ *       409:
+ *         description: User already exists
+ */
+
+/**
+ * @swagger
+ * /api/v1/users/{id}:
+ *   get:
+ *     summary: Get user by ID
+ *     tags: 
+ *       - Users
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the user to retrieve
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: User retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       404:
+ *         description: User not found
+ *   put:
+ *     summary: Update user by ID
+ *     tags: 
+ *       - Users
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the user to update
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/User'
+ *     responses:
+ *       200:
+ *         description: User updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       400:
+ *         description: Bad request, invalid user data
+ *       404:
+ *         description: User not found
+ *   delete:
+ *     summary: Delete user by ID
+ *     tags: 
+ *       - Users
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the user to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: User deleted successfully
+ *       404:
+ *         description: User not found
+ */
+
+
 router.post("/blog", uploadService.single("image"), Jwt.tokenValidation, isAdmin, blogsController.create_blogs);
+
+
+
+
+
+//blog
 router.get("/blogs", blogsController.getAllBlogs);
 router.get("/blog/:id", blogsController.getSingleBlog);
 router.patch("/blog/:id", blogsController.updatedBlogs);

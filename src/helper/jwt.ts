@@ -10,7 +10,7 @@ return accessToken;
 const tokenValidation  = async (req:any,res:Response,next:NextFunction) => {
     const accessToken  = req.cookies["access-token"];
     if(!accessToken){
-        return res.status(400).json({error:" Login with your account First"})
+        return res.status(401).json({error:" Login with your account First"})
     }else{
         try{
             let authenticated:any;
@@ -23,7 +23,7 @@ const tokenValidation  = async (req:any,res:Response,next:NextFunction) => {
                 return next();
             }
         }catch(err:any){
-            return res.status(400).json({error:err}); 
+            return res.status(401).json({error:err}); 
         }
     }
 }
