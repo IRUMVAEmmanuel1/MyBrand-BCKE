@@ -6,8 +6,8 @@ const createQuerries = async (req: Request, res: Response) => {
 		const valid = joiValidation.validateQuerries(req.body);
 		const querries = await querriesService.create_querries(req);
 		if (valid.error) {
-			res.status(400).json({
-				status: 400,
+			res.status(401).json({
+				status: 401,
 				message: valid.error?.message,
 			});
 		} else {

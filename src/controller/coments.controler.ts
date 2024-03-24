@@ -7,8 +7,8 @@ const createComents = async (req: Request, res: Response) => {
 		const valid = joiValidation.validateCommentData(req.body);
 		const coments = await cometSercice.create_coments(req);
 		if (coments === false) {
-			res.status(400).json({
-				status: 400,
+			res.status(401).json({
+				status: 401,
 				message: valid.error?.message,
 			});
 		} else {

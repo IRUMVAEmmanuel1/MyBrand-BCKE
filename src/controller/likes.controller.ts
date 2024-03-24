@@ -7,8 +7,8 @@ const createLikes = async (req: Request, res: Response) => {
 		const valid = joiValidation.likesValidatin(req.body);
 		const like = await likeSercice.create_likes(req);
 		if (valid.error) {
-			res.status(400).json({
-				status: 400,
+			res.status(401).json({
+				status: 401,
 				message: valid.error?.message,
 			});
 		} else {
