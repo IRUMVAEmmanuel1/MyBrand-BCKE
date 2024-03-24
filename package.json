@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --coverage",
-    "dev": "nodemon ./dist/index.ts"
+    "dev": "nodemon ./dist/index.ts",
+    "swagger": "swagger-jsdoc -d src/swaggerDef.js src/**/*.ts"
   },
   "keywords": [],
   "author": "",
