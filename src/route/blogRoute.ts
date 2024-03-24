@@ -5,12 +5,17 @@ import blogsController from "../controller/blogs.controller";
 import uploadService from "../service/multer";
 import { isAdmin } from "../middleware/UserMiddleware";
 
-const blogsRoutes = express.Router();
-blogsRoutes.post("/blog", uploadService.single("image"), Jwt.tokenValidation, isAdmin, blogsController.create_blogs);
+const blogRoutes = express.Router();
+blogRoutes.post("/blog", uploadService.single("image"), Jwt.tokenValidation, isAdmin, blogsController.create_blogs);
 
-blogsRoutes.get("/blogs", blogsController.getAllBlogs);
-blogsRoutes.get("/blog/:id", blogsController.getSingleBlog);
-blogsRoutes.patch("/blog/:id", blogsController.updatedBlogs);
-blogsRoutes.delete("/blog/:id", blogsController.removeBlogs);
+blogRoutes.get("/blogs", blogsController.getAllBlogs);
+blogRoutes.get("/blog/:id", blogsController.getSingleBlog);
+blogRoutes.patch("/blog/:id", blogsController.updatedBlogs);
+blogRoutes.delete("/blog/:id", blogsController.removeBlogs);
 
-export default blogsRoutes;
+
+
+
+export default blogRoutes;
+
+
