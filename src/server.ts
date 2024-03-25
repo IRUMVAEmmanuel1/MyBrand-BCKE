@@ -12,6 +12,7 @@ import likeRoutes from './route/likeRoutes';
 import querriesRoutes from './route/querriesRoutes';
 import usersRoutes from './route/usersRoutes';
 
+const server = express.Router();
 // Connect to DB
 connectDB();
 const options = { 
@@ -62,3 +63,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+export default server;

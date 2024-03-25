@@ -296,6 +296,196 @@ const router = express.Router();
  *         description: User not found
  */
 
+/**
+ * @swagger
+ * tags:
+ *   name: Likes
+ *   description: API endpoints for managing likes
+ */
+
+/**
+ * @swagger
+ * /api/v1/likes:
+ *   post:
+ *     summary: Create a new like
+ *     tags: 
+ *       - Likes
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Like'
+ *     responses:
+ *       200:
+ *         description: New like created
+ *       401:
+ *         description: Unauthorized, invalid like data
+ */
+
+/**
+ * @swagger
+ * /api/v1/likes/{blogId}:
+ *   get:
+ *     summary: Get likes based on blog ID
+ *     tags: 
+ *       - Likes
+ *     parameters:
+ *       - in: path
+ *         name: blogId
+ *         required: true
+ *         description: ID of the blog to get likes for
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Likes retrieved successfully
+ *       404:
+ *         description: No likes found for the specified blog
+ *   delete:
+ *     summary: Remove like
+ *     tags: 
+ *       - Likes
+ *     parameters:
+ *       - in: path
+ *         name: blogId
+ *         required: true
+ *         description: ID of the blog to remove like from
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Like deleted successfully
+ *       404:
+ *         description: Like not found
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Comments
+ *   description: API endpoints for managing comments
+ */
+
+/**
+ * @swagger
+ * /api/v1/blogs/{blogId}/comments:
+ *   post:
+ *     summary: Create a new comment
+ *     tags: 
+ *       - Comments
+ *     parameters:
+ *       - in: path
+ *         name: blogId
+ *         required: true
+ *         description: ID of the blog to add comment to
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Comment'
+ *     responses:
+ *       200:
+ *         description: New comment created
+ *       401:
+ *         description: Unauthorized, invalid comment data
+ */
+
+/**
+ * @swagger
+ * /api/v1/blogs/{blogId}/comments:
+ *   get:
+ *     summary: Get comments based on blog ID
+ *     tags: 
+ *       - Comments
+ *     parameters:
+ *       - in: path
+ *         name: blogId
+ *         required: true
+ *         description: ID of the blog to get comments for
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Comments retrieved successfully
+ *       404:
+ *         description: No comments found for the specified blog
+ */
+
+
+/**
+ * @swagger
+ * tags:
+ *   name: Queries
+ *   description: API endpoints for managing queries
+ */
+
+/**
+ * @swagger
+ * /api/v1/queries:
+ *   post:
+ *     summary: Create a new query
+ *     tags:
+ *       - Queries
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Query'
+ *     responses:
+ *       200:
+ *         description: New query created successfully
+ *       400:
+ *         description: Invalid request body
+ */
+
+/**
+ * @swagger
+ * /api/v1/queries/{id}:
+ *   delete:
+ *     summary: Delete a query by ID
+ *     tags:
+ *       - Queries
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the query to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: Query deleted successfully
+ *       404:
+ *         description: Query not found
+ */
+
+/**
+ * @swagger
+ * /api/v1/{id}/queries:
+ *   get:
+ *     summary: Get all queries
+ *     tags:
+ *       - Queries
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the user to get queries for
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Queries retrieved successfully
+ *       400:
+ *         description: Invalid user ID
+ */
+
+
 
 router.post("/blog", uploadService.single("image"), Jwt.tokenValidation, isAdmin, blogsController.create_blogs);
 
