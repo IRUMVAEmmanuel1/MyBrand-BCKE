@@ -3,8 +3,8 @@ import Jwt from "../helper/jwt";
 import blogsController from "../controller/blogs.controller";
 import uploadService from "../service/multer";
 import { isAdmin } from "../middleware/UserMiddleware";
-import userC
-const router = express.Router();
+// import user/C
+// const router = express.Router();
 
 /**
  * @swagger
@@ -15,7 +15,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/blog:
+ * /api/blogs:
  *   post:
  *     summary: Create a new blog post
  *     tags: [Blogs]
@@ -53,7 +53,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/blog/{id}:
+ * /api/blogs/{id}:
  *   get:
  *     summary: Get a single blog by ID
  *     tags: [Blogs]
@@ -485,18 +485,47 @@ const router = express.Router();
  *         description: Invalid user ID
  */
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: API endpoints for managing users
+ */
 
-
-router.post("/blog", uploadService.single("image"), Jwt.tokenValidation, isAdmin, blogsController.create_blogs);
-
-
-
-
-
-//blog
-router.get("/blogs", blogsController.getAllBlogs);
-router.get("/blog/:id", blogsController.getSingleBlog);
-router.patch("/blog/:id", blogsController.updatedBlogs);
-router.delete("/blog/:id", blogsController.removeBlogs);
-
-export default router;
+/**
+ * @swagger
+ * /api/v1/users/login:
+ *   post:
+ *     summary: User login
+ *     tags:
+ *       - Users
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: User's email address
+ *               password:
+ *                 type: string
+ *                 description: User's password
+ *     responses:
+ *       200:
+ *         description: Successful login
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: Authentication token
+ *       404:
+ *         description: User not found
+ *       401:
+ *         description: Incorrect email or password
+ */

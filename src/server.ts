@@ -50,8 +50,8 @@ dotenv.config();
 // Routes
 app.use('/api', blogRoute);
 app.use('/api/v1', usersRoutes);
-app.use('/api/blog', commentsRoutes);
-app.use('/api/blog', likeRoutes);
+app.use('/api/blogs', commentsRoutes);
+app.use('/api/blogs', likeRoutes);
 app.use('/api', querriesRoutes);
 
 app.get("/", (req, res) =>{
