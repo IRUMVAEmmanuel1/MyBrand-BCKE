@@ -1,71 +1,41 @@
-// import supertest from 'supertest';
-// import mongoose from 'mongoose';
-// import bcrypt from 'bcrypt';
-// import express, { Request } from 'express';
-// import { app } from '../server';
-// import User from '../models/user';
-// import userService from '../service/userService';
+import usersController from '../controller/users.controller';
+import userService from '../service/userService';
 
-// const request = supertest(app);
+describe('User Controller Tests', () => {
+  let req:any;
+  let res:any;
 
-// const createMockRequest = (body: any): Request => {
-//   const req = express.request;
-//   req.body = body;
-//   return req;
-// };
+  beforeEach(() => {
+    req = { body: {}, params: {} };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn(),
+    };
+  });
 
-// describe('User', () => {
-//   const newUser = {
-//     username: 'patrick',
-//     email: 'kalisapa@gmail.com',
-//     password: 'password123',
-//   };
+  describe('register', () => {
+    it('should register a new user', async () => {
+      req.body = { username: 'testuser', email: 'test@example.com', password: 'testpassword' };
+      userService.users_register = jest.fn().mockReturnValue(true);
+      await usersController.register(req, res);
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith({ status: 200, message: 'User registered Successfully!' });
+    });
 
-//   beforeAll(async () => {
-//     await mongoose.connect('mongodb+srv://Irumva:IrumvaEmmanuel97@cluster0.ws2ver4.mongodb.net/', {
-//     });
-//   });
+    it('should return validation error if invalid data is provided', async () => {
+      req.body = { invalidField: 'value' }; // Invalid data
+      await usersController.register(req, res);
+      expect(res.status).toHaveBeenCalledWith(401);
+      expect(res.json).toHaveBeenCalledWith({ status: 401, error: 'Validation error message' });
+    });
 
-//   afterAll(async () => {
-//     await mongoose.connection.close();
-//   });
+    // Add more tests for other scenarios
+  });
 
-//   beforeEach(async () => {
-//     await User.deleteMany({});
-//   });
+  // Add tests for other UserController functions (login, getAllUsers, getUserById)
+});
 
-//   describe('POST /users', () => {
-//     it('should register a new user', async () => {
-//       const response = await request.post('/users').send(newUser);
-//       expect(response.status).toBe(200);
-//       expect(response.body.message).toBe('User registered Successfully!');
-//     });
+describe('User Service Tests', () => {
+  // Write tests for userService functions similarly using Jest mocks
+});
 
-  
-//   });
-
-//   describe('userService', () => {
-//     it('should register a new user', async () => {
-//       const registeredUser = await userService.users_register(createMockRequest(newUser));
-//       if (registeredUser !== false && registeredUser !== null) {
-//         expect(registeredUser).toBeDefined();
-//         // expect(users_register.username).toBe(newUser.username);
-//         expect(registeredUser.email).toBe(newUser.email);
-//         expect(bcrypt.compareSync(newUser.password, registeredUser.password)).toBe(true);
-//       } else {
-       
-//       }
-//     });
-
-//     it('should not register a user with existing username or email', async () => {
-//       await User.create(newUser);
-//       const registeredUser = await userService.users_register(createMockRequest(newUser));
-//       if (registeredUser !== undefined && registeredUser !== false) {
-//         // This block will never be executed because the service returns false for existing users
-//       } else {
-//         expect(registeredUser).toBe(false);
-//       }
-//     });
-
-//   });
-// });
