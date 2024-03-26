@@ -1,11 +1,13 @@
 import express, { Request, Response } from "express";
 import cometSercice from "../service/commentSercice";
 import joiValidation from "../helper/joi.validation";
-// //creating a coments
+// creating a coments
 const createComents = async (req: Request, res: Response) => {
+	let user:any = req.user
+
 	try {
 		const valid = joiValidation.validateCommentData(req.body);
-		const coments = await cometSercice.create_coments(req);
+		const coments = await cometSercice.create_coments(req, user._id);
 		if (coments === false) {
 			res.status(401).json({
 				status: 401,

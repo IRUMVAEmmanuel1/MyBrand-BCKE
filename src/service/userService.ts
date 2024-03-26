@@ -16,6 +16,7 @@ const users_register = async (req: Request) => {
 			return false;
 		} else {
 			
+			
 			await bcrypt.hash(password, 10).then((hash) => {
 				const users = new Users({
 					username: username,
@@ -74,7 +75,7 @@ const gettingLoggedInUser = async () => {
 	}
 };
 
-export default {
+export default{
 	users_register,
 	userLogin,
 	gettingLoggedInUser,

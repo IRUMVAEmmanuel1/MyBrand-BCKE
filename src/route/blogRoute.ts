@@ -3,7 +3,7 @@ import Jwt from "../helper/jwt";
 import blogsController from "../controller/blogs.controller";
 import uploadService from "../service/multer";
 import { isAdmin } from "../middleware/UserMiddleware";
-
+import {isLoggedIn} from "../middleware/normalUser"
 const blogRoutes = express.Router();
 
 blogRoutes.post("/blogs", uploadService.single("image"), Jwt.tokenValidation, isAdmin, blogsController.create_blogs);

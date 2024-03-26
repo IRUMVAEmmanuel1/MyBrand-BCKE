@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const comentsSchema = new mongoose.Schema({
-    user:{type:String,required:true},
+    user:{type:String,required:false},
     coment:{type:String,required:true},
     blogID:{
         type:mongoose.Schema.Types.ObjectId,
