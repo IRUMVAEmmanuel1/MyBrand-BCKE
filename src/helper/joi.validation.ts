@@ -13,7 +13,6 @@ const validateBlogData = (blog: {
 //Comment validation
 const validateCommentData = (comment: { user: String; coment: String }) => {
 	const commentSchema = Joi.object({
-		user: Joi.string().required().min(3),
 		coment: Joi.string().required().min(3),
 	});
 	return commentSchema.validate(comment);

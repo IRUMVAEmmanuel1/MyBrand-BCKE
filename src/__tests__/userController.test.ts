@@ -1,5 +1,3 @@
-// userController.ts
-
 import { Request, Response } from "express";
 import userService from "../service/userService";
 import joiValidation from "../helper/joi.validation";
@@ -40,42 +38,55 @@ const login = async (req: Request, res: Response) => {
         status: 404,
         message: "User Not Found !",
       });
-    } else {
-      bcrypt.compare(password, user.password).then((match) => {
-        if (!match) {
-          res.status(401).json({
-            status: 401,
-            message: "Wrong Email or Password!",
-          });
-        } else {
-          const accessToken = Jwt.createToken(user);
-          res.cookie("access-token", accessToken, {
-            maxAge: 60 * 60 * 24 * 31 * 1000,
-            httpOnly: true,
-          });
-          res.status(200).json({
-            status: 200,
-            token: accessToken,
-          });
-        }
-      });
+      return; // Return to exit the function after sending the response
     }
-  } catch (err: any) {
-    throw new Error(err.message);
+
+    // Compare passwords asynchronously
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      res.status(401).json({
+        status: 401,
+        message: "Wrong Email or Password!",
+      });
+      return; // Return to exit the function after sending the response
+    }
+
+    // Generate and send access token
+    const accessToken = Jwt.createToken(user);
+    res.cookie("access-token", accessToken, {
+      maxAge: 60 * 60 * 24 * 31 * 1000,
+      httpOnly: true,
+    });
+    res.status(200).json({
+      status: 200,
+      token: accessToken,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      status: 500,
+      message: error.message,
+    });
   }
 };
 
 const getAllusers = async (req: Request, res: Response) => {
-  const getAlluser = await userService.retrieve();
-  if (!getAlluser) {
-    res.status(401).json({
-      status: 401,
-      message: "User not found",
-    });
-  } else {
-    res.status(200).json({
-      status: 200,
-      message: getAlluser,
+  try {
+    const getAlluser = await userService.retrieve();
+    if (!getAlluser) {
+      res.status(401).json({
+        status: 401,
+        message: "User not found",
+      });
+    } else {
+      res.status(200).json({
+        status: 200,
+        message: getAlluser,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: "Internal Server Error",
     });
   }
 };
@@ -98,10 +109,11 @@ const getUserById = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       status: 500,
-      message: "Bad Request"
+      message: "Internal Server Error",
     });
   }
 };
+
 export default {
   register,
   login,

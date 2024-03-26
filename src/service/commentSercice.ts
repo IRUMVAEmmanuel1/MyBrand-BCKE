@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import coments from "../models/comments";
 import joiValidation from "../helper/joi.validation";
-const create_coments = async (req: Request) => {
+const create_coments = async (req: Request, userId:string) => {
 	const valid = joiValidation.validateCommentData(req.body);
 	const id = { _id: req.params.id };
-	console.log(id);
+	console.log(userId);
 	if (valid.error) {
 		return false;
 	} else {
 		const created_coments = new coments({
-			user: req.body.user,
+			user: userId,
 			coment: req.body.coment,
 			blogID: id,
 		});

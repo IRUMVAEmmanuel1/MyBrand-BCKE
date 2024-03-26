@@ -4,11 +4,14 @@
   "description": "",
   "main": "",
   "scripts": {
-    "start": "nodemon src/index.ts",
     "test": "jest --coverage",
-    "dev": "nodemon ./dist/index.ts",
-    "swagger": "swagger-jsdoc -d src/swaggerDef.js src/**/*.ts"
+    "dev": "nodemon ./dist/index.js",
+    "build": "tsc",
+    "start": "npm run build && nodemon dist/index.js",
+    "swagger": "swagger-jsdoc -d src/swaggerDef.js dist/index.js"
+   
   },
+  
   "keywords": [],
   "author": "",
   "license": "ISC",

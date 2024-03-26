@@ -14,6 +14,7 @@ const create_querries = async (req: Request) => {
 		});
 		await created_querriess.save();
 	}
+	
 };
 const fetch_querries = async (req: Request) => {
 	try {
