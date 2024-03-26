@@ -18,6 +18,16 @@ connectDB();
 const options = { 
   definition: {
     openapi: '3.0.0',
+    components: {
+      securitySchemes: {
+          Authorization: {
+              type: "http",
+              scheme: "bearer",
+              bearerFormat: "JWT",
+              value: "Bearer <JWT token here>"
+          }
+      }
+    },
     info: { 
       title: 'Emmanuel Irumva Brand Restful API Documentation', 
       version: '1.0.0',
@@ -57,6 +67,7 @@ app.use('/api', querriesRoutes);
 app.get("/", (req, res) =>{
   res.status(200).json(("Welcome"))
 })
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;

@@ -5,10 +5,10 @@ describe('Blog CRUD Operations', () => {
   let createdBlogId ="65ef0cc7e239bf8e64952654";
 
   // Test creating a new blog
-  describe('POST /api/blog', () => {
+  describe('POST /api/blogs', () => {
     it('should create a new blog', async () => {
       const response = await supertest(app)
-        .post('/api/blog')
+        .post('/api/blogs')
         .send({
           title: 'Test Blog',
           content: 'This is a test blog content',
@@ -22,29 +22,29 @@ describe('Blog CRUD Operations', () => {
   });
 
   // Test getting all blogs
-  describe('GET /api/blog', () => {
+  describe('GET /api/blogs', () => {
     it('should return all blogs', async () => {
-      await supertest(app).get('/api/blog').expect(200);
+      await supertest(app).get('/api/blogs').expect(200);
     });
   });
 
   // Test getting a single blog
-  describe('GET /api/blog/:id', () => {
+  describe('GET /api/blogs/:id', () => {
     it('should return a single blog', async () => {
-      await supertest(app).get(`/api/blog/${createdBlogId}`).expect(200);
+      await supertest(app).get(`/api/blogs/${createdBlogId}`).expect(200);
     });
 
     it('should return 404 if blog does not exist', async () => {
       const nonExistentId = '65ef0cc7e239bf8e64952654';
-      await supertest(app).get(`/api/blog/${nonExistentId}`).expect(404);
+      await supertest(app).get(`/api/blogs/${nonExistentId}`).expect(404);
     });
   });
 
   // Test updating a blog
-  describe('PUT /api/blog/:id', () => {
+  describe('PUT /api/blogs/:id', () => {
     it('should update an existing blog', async () => {
       await supertest(app)
-        .put(`/api/blog/${createdBlogId}`)
+        .put(`/api/blogs/${createdBlogId}`)
         .send({
           title: 'Updated Test Blog',
           content: 'This is an updated test blog content',
@@ -56,7 +56,7 @@ describe('Blog CRUD Operations', () => {
     it('should return 404 if blog does not exist', async () => {
       const nonExistentId = '65ef0cc7e239bf8e64952654';
       await supertest(app)
-        .put(`/api/blog/${nonExistentId}`)
+        .put(`/api/blogs/${nonExistentId}`)
         .send({
           title: 'Updated Test Blog',
           content: 'This is an updated test blog content',
@@ -67,14 +67,14 @@ describe('Blog CRUD Operations', () => {
   });
 
   // Test deleting a blog
-  describe('DELETE /api/blog/:id', () => {
+  describe('DELETE /api/blogs/:id', () => {
     it('should delete an existing blog', async () => {
-      await supertest(app).delete(`/api/blog/${createdBlogId}`).expect(204);
+      await supertest(app).delete(`/api/blogs/${createdBlogId}`).expect(204);
     });
 
     it('should return 404 if blog does not exist', async () => {
       const nonExistentId = '65ef0cc7e239bf8e64952654';
-      await supertest(app).delete(`/api/blog/${nonExistentId}`).expect(404);
+      await supertest(app).delete(`/api/blogs/${nonExistentId}`).expect(404);
     });
   });
 });
