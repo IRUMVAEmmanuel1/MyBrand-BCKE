@@ -270,7 +270,7 @@ const options = {
         },
       },
     },
-    "/api/v1/blogs/{id}": {
+    "/api/blogs/{id}": {
       get: {
         tags: ["Blogs"],
         summary: "Get blog by ID",
@@ -370,7 +370,7 @@ const options = {
         },
       },
     },
-    "/api/v1/blogs/{id}/comments": {
+    "/api/blogs/{id}/comments": {
       post: {
         tags: ["Comments"],
         summary: "Add a comment to a blog post",
@@ -446,7 +446,7 @@ const options = {
         },
       },
     },
-    "/api/v1/blogs/{id}/likes": {
+    "/api/blogs/{id}/likes": {
       post: {
         tags: ["Likes"],
         summary: "Like a blog post",
@@ -518,9 +518,9 @@ const options = {
         },
       },
     },
-    "/api/v1/queries": {
+    "/api/querries": {
         post: {
-          tags: ["Queries"],
+          tags: ["Querries"],
           summary: "Create a new query",
           requestBody: {
             required: true,
@@ -549,7 +549,7 @@ const options = {
           },
         },
         get: {
-          tags: ["Queries"],
+          tags: ["Querries"],
           summary: "Get all queries",
           security: [{ bearerAuth: [] }],
           responses: {
@@ -572,7 +572,7 @@ const options = {
           },
         },
       },
-      "/api/v1/queries/{id}": {
+      "/api/queries/{id}": {
         delete: {
           tags: ["Queries"],
           summary: "Delete a query by ID",

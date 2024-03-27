@@ -82,8 +82,8 @@ const getAllusers = async (req: Request, res: Response) => {
 
 const getUserById = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.params;
-    const user = await userService.getUserById(userId);
+    const { id } = req.params;
+    const user = await userService.getUserById(id);
     if (!user) {
       res.status(404).json({
         status: 404,
