@@ -48,9 +48,9 @@ const userLogin = async (req: Request) => {
 };
 
 // Retrieve user by ID
-const getUserById = async (userId: string) => {
+const getUserById = async (id: string) => {
 	try {
-		const user = await Users.findById(userId);
+		const user = await Users.findById(id);
 		return user;
 	} catch (error: any) {
 		throw new Error(error.message);
