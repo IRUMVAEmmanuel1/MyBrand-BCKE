@@ -34,12 +34,9 @@ app.use("/api", querriesRoutes);
 
 // Start the server
 
-if(require.main === module){
-	const PORT = process.env.PORT || 5000;
-	app.listen(PORT, () => {
-		console.log(`Server is running on port ${PORT}`);
-	});
-	
-}
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});
 
 export default server;
