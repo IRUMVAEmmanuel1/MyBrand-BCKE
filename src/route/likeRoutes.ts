@@ -4,9 +4,9 @@ import {isLoggedIn} from "../middleware/normalUser"
 import Jwt from "../helper/jwt";
 const likesRoutes = express.Router();
 
-likesRoutes.post("/:id/likes",Jwt.tokenValidation,likesController.createLikes);
+likesRoutes.post("/:id/likes", isLoggedIn,likesController.createLikes);
 likesRoutes.get("/:id/likes",likesController.getLikesBasedOnBlogId);
-likesRoutes.delete("/:id/likes/:id",Jwt.tokenValidation, likesController.removeLikes);
+likesRoutes.delete("/:id/likes/:id",isLoggedIn, likesController.removeLikes);
 
 
 export default likesRoutes;

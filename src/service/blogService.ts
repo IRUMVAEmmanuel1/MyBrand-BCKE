@@ -2,13 +2,14 @@ import { Request } from "express";
 import Blogs from "../models/blogs";
 import joiValidation from "../helper/joi.validation";
 import { v2 as cloudinary } from "cloudinary";
+import mongoose from "mongoose";
 
 // cloudinary configuration
 
-cloudinary.config({ 
-  cloud_name: 'dd46id3xx', 
-  api_key: '676727721327958', 
-  api_secret: 'geMdvbckvvTS2VEaFOXjD6gJ-ik' 
+cloudinary.config({
+	cloud_name: "dd46id3xx",
+	api_key: "676727721327958",
+	api_secret: "geMdvbckvvTS2VEaFOXjD6gJ-ik",
 });
 
 const createBlogs = async (req: any, image: string) => {
@@ -96,3 +97,9 @@ export default {
 	updateBlogs,
 	removeBlogs,
 };
+export const UserSchema = new mongoose.Schema({
+	username: { type: String, required: true, unique: true },
+	isAdmin: { type: Boolean, default: false },
+	email: { type: String, required: true, unique: true },
+	password: { type: String, required: true, unique: true },
+});

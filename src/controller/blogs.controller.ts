@@ -61,6 +61,7 @@ const updatedBlogs = async (req: Request, res: Response) => {
 		res.status(200).json({
 			status: 200,
 			message: "Blog Updated Successfully",
+			updateBlg
 		});
 	}
 };

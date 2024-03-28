@@ -8,7 +8,7 @@ interface AuthRequest extends Request {
 }
 
 const createToken = (user: any) => {
-  const accessToken = sign({ userId: user.user._Id }, "whatyouseeiswhatyouget");
+  const accessToken = sign({ userId: user._id }, "whatyouseeiswhatyouget", {expiresIn: "1d"});
   return accessToken;
 };
 
@@ -21,6 +21,7 @@ const tokenValidation = async (req: AuthRequest, res: Response, next: NextFuncti
       } else {
        
         req.user = decode; // Assign the decoded user data to the custom user property
+      
         next();
       }
     });
