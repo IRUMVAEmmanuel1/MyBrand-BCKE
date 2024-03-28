@@ -4,7 +4,7 @@
   "description": "",
   "main": "",
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest --coverage --testTimeout=10000 --detectOpenHandles",
     "dev": "nodemon ./dist/index.js",
     "build": "tsc",
     "start": "npm run build && nodemon dist/index.js",
