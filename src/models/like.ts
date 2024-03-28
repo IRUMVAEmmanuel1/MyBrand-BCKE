@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 const likeScema = new mongoose.Schema({
-    like:{type:Boolean,default:false},
+    
+    userId:{type:mongoose.Schema.Types.ObjectId,
+    ref: 'user'},
     blogID:{
         type:mongoose.Schema.Types.ObjectId,
         ref: 'blog'

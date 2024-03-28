@@ -1,19 +1,18 @@
 import { Request, Response } from "express";
 import likes from "../models/like";
 import joiValidation from "../helper/joi.validation";
-const create_likes = async (req: Request) => {
-	const valid = joiValidation.likesValidatin(req.body);
-	const id = { _id: req.params.id };
-	if (valid.error) {
-		return false;
-	} else {
-		const created_likes = new likes({
-			like: req.body.like,
+
+export const createLike = async (id: string, user: string) => {
+	const Like = await likes.create({
 			blogID: id,
-		});
-		await created_likes.save();
-	}
-};
+			userId: user,
+	});
+	return Like;
+}
+const getSingleLike = async (blogId: string, userId: string) => {
+	const like = await likes.findOne({ blogID: blogId, userId: userId});
+	return like;
+}
 const fetchlikes = async (req: Request) => {
 	try {
 		const id = { _id: req.params.id };
@@ -22,18 +21,13 @@ const fetchlikes = async (req: Request) => {
 		throw new Error(error.message);
 	}
 };
-const remove_likes = async (req: Request) => {
-	try {
-		const id = { _id: req.params.id };
-		//const LikeId = { _id: req.params.id };
-		return await likes.deleteOne(id);
-	} catch (error: any) {
-		throw new Error(error.message);
-	}
-};
-
+const remove_likes = async (id: string) => {
+	const like = await likes.findByIdAndDelete(id)
+	return null;
+}
 export default {
-	create_likes,
+	createLike,
 	fetchlikes,
 	remove_likes,
+	getSingleLike
 };
