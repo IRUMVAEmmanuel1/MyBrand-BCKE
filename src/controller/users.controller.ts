@@ -55,6 +55,7 @@ const login = async (req: Request, res: Response) => {
           });
           res.status(200).json({
             status: 200,
+            data: user,
             token: accessToken,
           });
         }
@@ -102,9 +103,41 @@ const getUserById = async (req: Request, res: Response) => {
     });
   }
 };
+
+const updateUserById = async (req: Request, res: Response) => {
+	const user = await userService.updateUser(req.params.id, req.body);
+	if (!user) {
+		res.status(404).json({ status: 404, user: " User Not Found" });
+	} else {
+		res.status(200).json({
+			status: 200,
+			message: "User Updated Successfully",
+			
+		});
+	}
+};
+
+const deleteUser = async (req: Request, res: Response) => {
+  try{
+      const user: any = await userService.removeUser(req.params.id);
+      return res.status(200).json({
+          status: "success",
+          message: "User deleted successfully"
+      });
+  } catch(err: any){
+      res.status(400).json({
+          status: "Error",
+          message: err.message
+      })
+  }
+}
 export default {
   register,
   login,
   getAllusers,
   getUserById,
+  deleteUser,
+  updateUserById,
+ 
+
 };
