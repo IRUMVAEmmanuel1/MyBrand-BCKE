@@ -16,7 +16,6 @@ const server = express.Router();
 // Connect to DB
 connectDB();
 
-
 // Middleware
 
 app.use(express.json());
