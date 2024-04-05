@@ -1,6 +1,3 @@
-SERVER.TS MY BACKEND 
-
-
 import express from "express";
 import connectDB from "./config/db";
 import cors from "cors";
