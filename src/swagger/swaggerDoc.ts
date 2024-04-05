@@ -5,7 +5,7 @@
  *   name: Blogs
  *   description: API endpoints for managing blogs
  */
-
+ 
 /**
  * @swagger
  * /api/blogs:
