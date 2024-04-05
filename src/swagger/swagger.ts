@@ -180,7 +180,7 @@ const options = {
         },
       },
     },
-    "/api/v1/users/auth": {
+    "/api/v1/users/login": {
       post: {
         tags: ["Users"],
         summary: "Authenticate user",
@@ -319,7 +319,7 @@ const options = {
         requestBody: {
           required: true,
           content: {
-            "application/json": {
+            "multipart/form-data": {
               schema: {
                 $ref: "#/components/schemas/Blog",
               },

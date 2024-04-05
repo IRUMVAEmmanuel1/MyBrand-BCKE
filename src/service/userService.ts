@@ -3,6 +3,7 @@ import * as bcrypt from "bcrypt";
 import Users from "../models/user";
 import joiValidation from "../helper/joi.validation";
 
+
 const users_register = async (req: Request) => {
 	try {
 		const valid = joiValidation.validateUsersData(req.body);
@@ -74,11 +75,24 @@ const gettingLoggedInUser = async () => {
 		throw new Error(error.message);
 	}
 };
+const updateUser = async (id: string, user: any) => {
+	const newUser = await Users.findByIdAndUpdate(id, user);
+	return newUser
+}
 
+const removeUser = async (id: string) => {
+	const singleUser = await Users.findByIdAndDelete(id);
+	if(!singleUser){
+			throw new Error("User Not Found");
+	}
+	return
+}
 export default{
 	users_register,
 	userLogin,
 	gettingLoggedInUser,
 	retrieve,
-	getUserById, 
+	getUserById,
+	updateUser,
+	removeUser
 };
