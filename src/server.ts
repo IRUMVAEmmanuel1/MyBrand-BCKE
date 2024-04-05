@@ -1,3 +1,6 @@
+SERVER.TS MY BACKEND 
+
+
 import express from "express";
 import connectDB from "./config/db";
 import cors from "cors";
@@ -16,7 +19,6 @@ const server = express.Router();
 // Connect to DB
 connectDB();
 
-
 // Middleware
 
 app.use(express.json());
@@ -34,14 +36,9 @@ app.use("/api", querriesRoutes);
 
 // Start the server
 
-// if (require.main == module)
-// {
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });
-// }
-
 
 export default server;
-
